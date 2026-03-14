@@ -12,24 +12,13 @@ export const SubmitButton = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const API_URLS = [
-  "https://vectorshift-assignment-8sw4.onrender.com/pipelines/parse",
-  "http://localhost:8000/pipelines/parse"
-];
-
-const submit = async () => {
-  setLoading(true);
-  setError(null);
-
-  try {
-    let response = null;
-
-    for (const url of API_URLS) {
-      try {
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 8000);
-
-        const res = await fetch(url, {
+  const submit = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch(
+        "https://vectorshift-assignment-8sw4.onrender.com/pipelines/parse",
+        {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -37,38 +26,26 @@ const submit = async () => {
           body: JSON.stringify({
             nodes,
             edges
-          }),
-          signal: controller.signal
-        });
-
-        clearTimeout(timeout);
-
-        if (res.ok) {
-          response = res;
-          break;
+          })
         }
+      );
 
-      } catch (err) {
-        console.warn(`Failed to reach ${url}`, err);
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
       }
+
+      const data = await res.json();
+      setModalData(data);
+      setModalOpen(true);
+      
+    } catch (error) {
+      setError(error.message);
+      setModalOpen(true);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    if (!response) {
-      throw new Error("Backend service is unavailable.");
-    }
-
-    const data = await response.json();
-
-    setModalData(data);
-    setModalOpen(true);
-
-  } catch (error) {
-    setError(error.message);
-    setModalOpen(true);
-  } finally {
-    setLoading(false);
-  }
-};
   return (
     <>
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 hidden md:block">
