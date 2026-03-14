@@ -33,6 +33,7 @@
 //   );
 // }
 
+import { Cpu } from "lucide-react";
 import { BaseNode } from "./BaseNode";
 
 export const LLMNode = ({ id }) => {
@@ -40,6 +41,7 @@ export const LLMNode = ({ id }) => {
   return (
     <BaseNode
       title="Language Model"
+      icon={<Cpu className="w-4 h-4" />}
       inputs={[
         { id: `${id}-system`, label: "system", style: { top: "33%" } },
         { id: `${id}-prompt`, label: "prompt", style: { top: "66%" } }

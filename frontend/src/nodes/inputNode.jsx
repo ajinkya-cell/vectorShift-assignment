@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Download } from "lucide-react";
 import { BaseNode } from "./BaseNode";
 
 export const InputNode = ({ id, data }) => {
@@ -9,9 +10,12 @@ export const InputNode = ({ id, data }) => {
     data?.inputType || "Text"
   );
 
+  const icon = <Download className="w-4 h-4" />;
+
   return (
     <BaseNode
       title="Input"
+      icon={icon}
       outputs={[{ id: `${id}-value`, label: "out" }]}
       titleColor="text-blue-400"
     >

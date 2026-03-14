@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { GitBranch } from "lucide-react";
 import { BaseNode } from "./BaseNode";
 
 export const ConditionalNode = ({ id, data }) => {
@@ -7,6 +8,7 @@ export const ConditionalNode = ({ id, data }) => {
   return (
     <BaseNode
       title="Conditional"
+      icon={<GitBranch className="w-4 h-4" />}
       inputs={[
         { id: `${id}-condition`, label: "Condition" }
       ]}

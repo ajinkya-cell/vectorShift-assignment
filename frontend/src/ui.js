@@ -214,7 +214,7 @@ export const PipelineUI = () => {
   return (
     <div
       ref={reactFlowWrapper}
-      className="absolute inset-0 w-full h-full"
+      className="absolute inset-0 w-full h-full bg-[#050505]"
     >
       <ReactFlow
         nodes={nodes}
@@ -230,9 +230,14 @@ export const PipelineUI = () => {
         connectionLineType="smoothstep"
         fitView
       >
-        <Background gap={gridSize} color="rgba(255, 255, 255, 0.05)" />
+        <Background gap={32} size={2} color="rgba(255, 255, 255, 0.3)" />
         <Controls />
-        <MiniMap />
+        <MiniMap 
+          nodeStrokeColor={(n) => "rgba(255, 255, 255, 0.1)"}
+          nodeColor={(n) => "rgba(15, 15, 15, 1)"}
+          maskColor="rgba(0, 0, 0, 0.7)"
+          style={{ backgroundColor: '#0a0a0a' }}
+        />
       </ReactFlow>
     </div>
   );

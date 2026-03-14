@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Database } from "lucide-react";
 import { BaseNode } from "./BaseNode";
 
 export const DatabaseNode = ({ id, data }) => {
@@ -7,6 +8,7 @@ export const DatabaseNode = ({ id, data }) => {
   return (
     <BaseNode
       title="Database"
+      icon={<Database className="w-4 h-4" />}
       inputs={[
         { id: `${id}-query`, label: "Query" }
       ]}

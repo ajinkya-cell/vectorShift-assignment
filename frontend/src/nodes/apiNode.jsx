@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Globe } from "lucide-react";
 import { BaseNode } from "./BaseNode";
 
 export const APINode = ({ id, data }) => {
@@ -7,6 +8,7 @@ export const APINode = ({ id, data }) => {
   return (
     <BaseNode
       title="API Request"
+      icon={<Globe className="w-4 h-4" />}
       inputs={[
         { id: `${id}-url`, label: "URL" },
         { id: `${id}-body`, label: "Body", style: { top: "50%" } }

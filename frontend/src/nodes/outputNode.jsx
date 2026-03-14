@@ -47,6 +47,7 @@
 // }
 
 import { useState } from "react";
+import { Upload } from "lucide-react";
 import { BaseNode } from "./BaseNode";
 
 export const OutputNode = ({ id, data }) => {
@@ -60,6 +61,7 @@ export const OutputNode = ({ id, data }) => {
   return (
     <BaseNode
       title="Output"
+      icon={<Upload className="w-4 h-4" />}
       inputs={[{ id: `${id}-value`, label: "in" }]}
       titleColor="text-green-400"
     >

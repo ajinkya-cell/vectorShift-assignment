@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Filter } from "lucide-react";
 import { BaseNode } from "./BaseNode";
 
 export const FilterNode = ({ id, data }) => {
@@ -7,6 +8,7 @@ export const FilterNode = ({ id, data }) => {
   return (
     <BaseNode
       title="Filter"
+      icon={<Filter className="w-4 h-4" />}
       inputs={[
         { id: `${id}-data`, label: "Data" }
       ]}

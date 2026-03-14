@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { MessageSquare } from "lucide-react";
 import { BaseNode } from "./BaseNode";
 
 export const ChatNode = ({ id, data }) => {
@@ -7,6 +8,7 @@ export const ChatNode = ({ id, data }) => {
   return (
     <BaseNode
       title="Chat"
+      icon={<MessageSquare className="w-4 h-4" />}
       inputs={[
         { id: `${id}-input`, label: "Message" }
       ]}

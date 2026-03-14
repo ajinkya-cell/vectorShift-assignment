@@ -3,6 +3,7 @@ import { useStore } from "../store";
 
 export const BaseNode = ({
   title,
+  icon = null,
   inputs = [],
   outputs = [],
   children,
@@ -25,7 +26,12 @@ export const BaseNode = ({
       {/* Header with title and optional custom content */}
       <div className="flex items-center justify-between mb-4 border-b border-white/10 pb-2">
         <div className="flex items-center gap-2">
-          <div className="w-2.5 h-2.5 rounded-full bg-purple-500 animate-pulse shadow-[0_0_8px_rgba(168,85,247,0.8)]"></div>
+          
+          {icon && (
+            <span className={`flex items-center ${titleColor} opacity-90`}>
+              {icon}
+            </span>
+          )}
           <div className={`text-base font-bold tracking-wide ${titleColor}`}>
             {title}
           </div>
