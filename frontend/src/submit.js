@@ -12,13 +12,24 @@ export const SubmitButton = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const submit = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await fetch(
-        "http://localhost:8000/pipelines/parse",
-        {
+  const API_URLS = [
+  "https://vectorshift-assignment-8sw4.onrender.com/pipelines/parse",
+  "http://localhost:8000/pipelines/parse"
+];
+
+const submit = async () => {
+  setLoading(true);
+  setError(null);
+
+  try {
+    let response = null;
+
+    for (const url of API_URLS) {
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 8000);
+
+        const res = await fetch(url, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -26,26 +37,38 @@ export const SubmitButton = () => {
           body: JSON.stringify({
             nodes,
             edges
-          })
+          }),
+          signal: controller.signal
+        });
+
+        clearTimeout(timeout);
+
+        if (res.ok) {
+          response = res;
+          break;
         }
-      );
 
-      if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`);
+      } catch (err) {
+        console.warn(`Failed to reach ${url}`, err);
       }
-
-      const data = await res.json();
-      setModalData(data);
-      setModalOpen(true);
-      
-    } catch (error) {
-      setError(error.message);
-      setModalOpen(true);
-    } finally {
-      setLoading(false);
     }
-  };
 
+    if (!response) {
+      throw new Error("Backend service is unavailable.");
+    }
+
+    const data = await response.json();
+
+    setModalData(data);
+    setModalOpen(true);
+
+  } catch (error) {
+    setError(error.message);
+    setModalOpen(true);
+  } finally {
+    setLoading(false);
+  }
+};
   return (
     <>
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 hidden md:block">
