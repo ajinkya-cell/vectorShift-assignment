@@ -17,7 +17,8 @@ export const SubmitButton = () => {
     setError(null);
     try {
       const res = await fetch(
-        "https://vectorshift-assignment-8sw4.onrender.com/pipelines/parse",
+        //"http://localhost:8000/pipelines/parse" if you running the project locally and there is any issue you can use this api to connect with backend,
+         "https://vectorshift-assignment-8sw4.onrender.com/pipelines/parse",
         {
           method: "POST",
           headers: {
